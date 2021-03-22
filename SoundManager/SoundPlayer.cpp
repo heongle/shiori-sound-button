@@ -5,8 +5,7 @@
  * SoundPlayer constructor
  * @param int btnCount | Total number of buttons
 */
-SoundPlayer::SoundPlayer(int btnCount) {
-    buffer = std::make_unique<sf::SoundBuffer[]>((std::size_t)btnCount);
+SoundPlayer::SoundPlayer(int btnCount) : buffer(new sf::SoundBuffer[(std::size_t)btnCount]) {
     for (int i = 0; i < btnCount; ++i) {
         if (!buffer[i].loadFromMemory(sound_pointer[i], (std::size_t)sound_lenght_pointer[i])) {
             std::cerr << "Error opening Shiori Stream" << std::endl;

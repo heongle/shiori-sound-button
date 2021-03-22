@@ -1,0 +1,58 @@
+cmake_minimum_required(VERSION 3.17)
+project(Shiori_Sound_Sutton)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_C_FLAGS_RELEASE "-O2 -DNDEBUG")
+set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG")
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(QT5 REQUIRED Qt5Widgets)
+pkg_check_modules(SFML_AUDIO REQUIRED sfml-audio)
+
+include_directories(${QT5_INCLUDE_DIRS} ${SFML_AUDIO_INCLUDE_DIRS})
+link_directories(${QT5_LIBRARY_DIRS} ${SFML_AUDIO_INCLUDE_DIRS})
+add_definitions(${QT5_CFLAGS_OTHER} ${SFML_AUDIO_CFLAGS_OTHER})
+
+add_executable(Shiori_Sound_Button main.cpp
+        MainFrame.cpp
+        SoundBoard.cpp
+        SoundManager/SoundPlayer.cpp
+        resources/qt/soundBoardRes.cpp
+        resources/se_pointer.cpp
+        resources/se/aaa.cpp
+        resources/se/angang.cpp
+        resources/se/ban.cpp
+        resources/se/furukonnbodadon.cpp
+        resources/se/kankan.cpp
+        resources/se/kushami1.cpp
+        resources/se/kushami2.cpp
+        resources/se/kushami3.cpp
+        resources/se/kushami4.cpp
+        resources/se/kushami5.cpp
+        resources/se/kushami6.cpp
+        resources/se/kushami7.cpp
+        resources/se/kushami8.cpp
+        resources/se/kushami9.cpp
+        resources/se/okiroa.cpp
+        resources/se/oniichan_long.cpp
+        resources/se/oniichan_short.cpp
+        resources/se/otto.cpp
+        resources/se/oyasumina.cpp
+        resources/se/oyasuminasai_long.cpp
+        resources/se/oyasuminasai_short.cpp
+        resources/se/renda.cpp
+        resources/se/shiori_excellent.cpp
+        resources/se/shiori_excellent2.cpp
+        resources/se/shiori_great.cpp
+        resources/se/wanaaan.cpp
+        resources/se/wanan.cpp
+        resources/se/wanwang.cpp
+        resources/se/yumeiri.cpp
+        resources/se/yumeiriii.cpp
+        resources/se/yumenoshioridayo.cpp
+        resources/se/yumeotsu_long.cpp
+        resources/se/yumeotsu_short.cpp
+        resources/se/yuu.cpp
+        icon/shiori_icon.rc
+        )
+
+target_link_libraries(Shiori_Sound_Button ${QT5_LIBRARIES} ${SFML_AUDIO_LIBRARIES})

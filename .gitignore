@@ -34,3 +34,4 @@
 # VSCode Config
 *.json
 .vscode/**
+build/**
