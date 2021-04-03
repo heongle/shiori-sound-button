@@ -27,6 +27,8 @@ add_library(Res OBJECT
         resources/se/kushami7.cpp
         resources/se/kushami8.cpp
         resources/se/kushami9.cpp
+        resources/se/kushami10.cpp
+        resources/se/kushami11.cpp
         resources/se/okiroa.cpp
         resources/se/oniichan_long.cpp
         resources/se/oniichan_short.cpp
@@ -47,6 +49,12 @@ add_library(Res OBJECT
         resources/se/yumeotsu_long.cpp
         resources/se/yumeotsu_short.cpp
         resources/se/yuu.cpp
+        resources/se/anaaan.cpp
+        resources/se/eieiei.cpp
+        resources/se/hyaaa.cpp
+        resources/se/shiori_ne.cpp
+        resources/se/shiori_punch.cpp
+        resources/se/shiori_punch2.cpp
 )
 
 add_library(SoundBoard OBJECT 

@@ -37,6 +37,12 @@ extern unsigned int kushami8_wav_len;
 extern unsigned char kushami9_wav[];
 extern unsigned int kushami9_wav_len;
 
+extern unsigned char kushami10_wav[];
+extern unsigned int kushami10_wav_len;
+
+extern unsigned char kushami11_wav[];
+extern unsigned int kushami11_wav_len;
+
 extern unsigned char okiroa_wav[];
 extern unsigned int okiroa_wav_len;
 
@@ -99,3 +105,21 @@ extern unsigned int shiori_excellent_wav_len;
 
 extern unsigned char shiori_excellent2_wav[];
 extern unsigned int shiori_excellent2_wav_len;
+
+extern unsigned char anaaan_wav[];
+extern unsigned int anaaan_wav_len;
+
+extern unsigned char eieiei_wav[];
+extern unsigned int eieiei_wav_len;
+
+extern unsigned char hyaaa_wav[];
+extern unsigned int hyaaa_wav_len;
+
+extern unsigned char shiori_ne_wav[];
+extern unsigned int shiori_ne_wav_len;
+
+extern unsigned char shiori_punch_wav[];
+extern unsigned int shiori_punch_wav_len;
+
+extern unsigned char shiori_punch2_wav[];
+extern unsigned int shiori_punch2_wav_len;
