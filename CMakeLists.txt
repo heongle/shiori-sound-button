@@ -2,21 +2,16 @@ cmake_minimum_required(VERSION 3.17)
 project(Shiori_Sound_Sutton)
 
 set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 set(CMAKE_C_FLAGS_RELEASE "-O2 -DNDEBUG")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG")
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(QT5 REQUIRED Qt5Widgets)
 pkg_check_modules(SFML_AUDIO REQUIRED sfml-audio)
 
-include_directories(${QT5_INCLUDE_DIRS} ${SFML_AUDIO_INCLUDE_DIRS})
-link_directories(${QT5_LIBRARY_DIRS} ${SFML_AUDIO_INCLUDE_DIRS})
-add_definitions(${QT5_CFLAGS_OTHER} ${SFML_AUDIO_CFLAGS_OTHER})
-
-add_executable(Shiori_Sound_Button main.cpp
-        MainFrame.cpp
-        SoundBoard.cpp
-        SoundManager/SoundPlayer.cpp
+add_library(Res OBJECT
         resources/qt/soundBoardRes.cpp
+        icon/shiori_icon.rc
         resources/se_pointer.cpp
         resources/se/aaa.cpp
         resources/se/angang.cpp
@@ -52,7 +47,43 @@ add_executable(Shiori_Sound_Button main.cpp
         resources/se/yumeotsu_long.cpp
         resources/se/yumeotsu_short.cpp
         resources/se/yuu.cpp
-        icon/shiori_icon.rc
-        )
+)
 
-target_link_libraries(Shiori_Sound_Button ${QT5_LIBRARIES} ${SFML_AUDIO_LIBRARIES})
+add_library(SoundBoard OBJECT 
+        SoundBoard.cpp
+)
+
+add_library(SoundPlayer OBJECT
+        SoundManager/SoundPlayer.cpp
+)
+
+add_library(MainFrame OBJECT 
+        MainFrame.cpp
+)
+
+add_executable(Shiori_Sound_Button 
+        main.cpp
+        $<TARGET_OBJECTS:Res>
+        $<TARGET_OBJECTS:MainFrame>
+        $<TARGET_OBJECTS:SoundBoard>
+        $<TARGET_OBJECTS:SoundPlayer>
+)
+
+if(CMAKE_BUILD_TYPE MATCHES Release)
+    if (WIN32)
+        target_link_options(Shiori_Sound_Button PRIVATE -mwindows)
+    endif (WIN32)
+
+    if (UNIX)
+        target_link_options(Shiori_Sound_Button PRIVATE -no-pie)
+    endif (UNIX)
+endif(CMAKE_BUILD_TYPE MATCHES Release)
+
+target_link_libraries(Shiori_Sound_Button PRIVATE ${QT5_LIBRARIES} ${SFML_AUDIO_LIBRARIES})
+target_include_directories(Shiori_Sound_Button PRIVATE ${QT5_INCLUDE_DIRS})
+target_link_directories(Shiori_Sound_Button PRIVATE ${QT5_LIBRARY_DIRS} ${SFML_LIBRARY_DIRS})
+target_compile_definitions(Shiori_Sound_Button PRIVATE ${QT5_CFLAGS_OTHER} ${SFML_AUDIO_CFLAGS_OTHER})
+
+target_include_directories(MainFrame PRIVATE ${QT5_INCLUDE_DIRS})
+target_include_directories(SoundBoard PRIVATE ${QT5_INCLUDE_DIRS})
+target_include_directories(SoundPlayer PRIVATE ${SFML_AUDIO_INCLUDE_DIRS})
