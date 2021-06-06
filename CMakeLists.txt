@@ -11,7 +11,6 @@ pkg_check_modules(SFML_AUDIO REQUIRED sfml-audio)
 
 add_library(Res OBJECT
         resources/qt/soundBoardRes.cpp
-        icon/shiori_icon.rc
         resources/se_pointer.cpp
         resources/se/aaa.cpp
         resources/se/angang.cpp
@@ -57,8 +56,8 @@ add_library(Res OBJECT
         resources/se/shiori_punch2.cpp
 )
 
-add_library(SoundBoard OBJECT 
-        SoundBoard.cpp
+add_library(Soundboard OBJECT 
+        Soundboard.cpp
 )
 
 add_library(SoundPlayer OBJECT
@@ -71,9 +70,10 @@ add_library(MainFrame OBJECT
 
 add_executable(Shiori_Sound_Button 
         main.cpp
+        icon/shiori_icon.rc
         $<TARGET_OBJECTS:Res>
         $<TARGET_OBJECTS:MainFrame>
-        $<TARGET_OBJECTS:SoundBoard>
+        $<TARGET_OBJECTS:Soundboard>
         $<TARGET_OBJECTS:SoundPlayer>
 )
 
@@ -83,7 +83,10 @@ if(CMAKE_BUILD_TYPE MATCHES Release)
     endif (WIN32)
 
     if (UNIX)
-        target_link_options(Shiori_Sound_Button PRIVATE -no-pie)
+        target_link_options(Shiori_Sound_Button PRIVATE -no-pie -pthread)
+        target_compile_options(Shiori_Sound_Button PRIVATE -fPIC)
+        target_compile_options(MainFrame PRIVATE -fPIC)
+        target_compile_options(Soundboard PRIVATE -fPIC)
     endif (UNIX)
 endif(CMAKE_BUILD_TYPE MATCHES Release)
 
@@ -93,5 +96,5 @@ target_link_directories(Shiori_Sound_Button PRIVATE ${QT5_LIBRARY_DIRS} ${SFML_L
 target_compile_definitions(Shiori_Sound_Button PRIVATE ${QT5_CFLAGS_OTHER} ${SFML_AUDIO_CFLAGS_OTHER})
 
 target_include_directories(MainFrame PRIVATE ${QT5_INCLUDE_DIRS})
-target_include_directories(SoundBoard PRIVATE ${QT5_INCLUDE_DIRS})
+target_include_directories(Soundboard PRIVATE ${QT5_INCLUDE_DIRS})
 target_include_directories(SoundPlayer PRIVATE ${SFML_AUDIO_INCLUDE_DIRS})
